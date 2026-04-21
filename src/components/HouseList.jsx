@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HouseRow from "./HouseRow";
 
-const HouseList = () => {
+const HouseList = ({selectHouse}) => {
     const[houses, setHouses] = useState([]);
 
     // Retrieved from an API
@@ -42,7 +42,9 @@ const HouseList = () => {
                 </tr>
                 </thead>
                 <tbody>
-                    {houses.map(h => <HouseRow key={h.id} house={h} />)}
+                    {houses.map(h => <HouseRow key={h.id} 
+                                               selectHouse={selectHouse} 
+                                               house={h} />)}
                 </tbody>
             </table>
             <button onClick={addHouse} className="btn btn-primary">
