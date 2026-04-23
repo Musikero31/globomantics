@@ -1,29 +1,38 @@
+//import { useCallback, useState } from "react";
 import "./App.css";
 import Banner from "./components/Banner";
+//import navValues from "./navigation/navValues";
+import { BrowserRouter, Route, Routes } from "react-router";
 import HouseList from "./components/HouseList";
 import House from "./components/House";
-import { useState } from "react";
-import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
-  const [selectedHouse, setSelectedHouse] = useState();
-
-  const setSelectedHouseWrapper = (house) => {
-    // do checks on house
-    setSelectedHouse(house);
-  }
+  // const navigate = useCallback(
+  //   (navTo, param) => setNav({current: navTo, param, navigate}),
+  //   []
+  // )
+  // const [nav, setNav] = useState({current: navValues.home, navigate})
 
   return (
-    <ErrorBoundary fallback="Something went wrong!">
+    /*
+    <navigationContext.Provider value={nav}>
+      <ErrorBoundary fallback="Something went wrong!">
+        <Banner>
+          <div>Providing houses all over the world!!!!</div>
+        </Banner>
+        <ComponentPicker currentNavLocation={nav.current}/>
+      </ErrorBoundary>
+    </navigationContext.Provider>
+    */
+    <BrowserRouter>
       <Banner>
         <div>Providing houses all over the world!!!!</div>
       </Banner>
-      {selectedHouse ? (
-        <House house={selectedHouse} />
-      ) : (
-        <HouseList selectHouse={setSelectedHouseWrapper} />
-      )}
-    </ErrorBoundary>
+      <Routes>
+        <Route index element={<HouseList/>}/>
+        <Route path="house/:id" element={<House/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

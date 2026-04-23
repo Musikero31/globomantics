@@ -1,8 +1,9 @@
-import { Activity, useState } from "react";
 import currencyFormatter from "../helpers/currencyFormatter";
+import { useLocation } from "react-router";
 
-const House = ({ house }) => {
-    const [visible, setVisibility] = useState(false)
+const House = () => {
+    const location = useLocation();
+    const { house } = location.state;
     return (
         <>
             <div className="row">
@@ -36,14 +37,7 @@ const House = ({ house }) => {
                     </div>
                 </div>
             </div>
-            <div className="row mt-5">
-                <button onClick={() => setVisibility(!visible)} className="btn btn-primary">
-                    Show
-                </button>
-                <Activity mode={visible ? "visible" : "hidden"}>
-                    <textarea placeholder="Write something here"></textarea>
-                </Activity>
-            </div>
+            
         </>
     );
 };
